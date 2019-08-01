@@ -1,4 +1,4 @@
-package pw.mr03.cotra;
+package pw.cotra;
 
 import java.util.Arrays;
 import java.util.List;

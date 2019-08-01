@@ -1,4 +1,4 @@
-package pw.mr03.cotra;
+package pw.cotra;
 
 public class Main {
 
