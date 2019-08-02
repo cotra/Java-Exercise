@@ -7,4 +7,11 @@
     <bean id="helloWorldPo" class="pw.cotra.HelloWorld">
         <property name="message" value="Hello World!"/>
     </bean>
+
+    <bean id="TextEditor" class="pw.cotra.editor.TextEditor">
+        <constructor-arg ref="spellChecker"/>
+    </bean>
+
+    <bean id="spellChecker" class="pw.cotra.editor.SpellChecker">
+    </bean>
 </beans>
