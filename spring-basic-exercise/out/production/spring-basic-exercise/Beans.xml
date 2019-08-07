@@ -1,8 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-        https://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+    <aop:config>
+        <aop:aspect id="log" ref="logging">
+            <aop:pointcut id="testAOP"
+                          expression="execution(* pw.cotra.aoptest.*.*(..))"/>
+            <aop:before pointcut-ref="testAOP" method="beforeAdvice"/>
+            <aop:after pointcut-ref="testAOP" method="afterAdvice"/>
+            <aop:after-returning pointcut-ref="testAOP"
+                                 returning="retVal"
+                                 method="afterReturningAdvice"/>
+            <aop:after-throwing pointcut-ref="testAOP"
+                                throwing="ex"
+                                method="AfterThrowingAdvice"/>
+        </aop:aspect>
+    </aop:config>
+
+    <!-- Definition for student bean -->
+    <bean id="student" class="pw.cotra.aoptest.Student">
+        <property name="name" value="Zara" />
+        <property name="age" value="11"/>
+    </bean>
+
+    <!-- Definition for logging aspect -->
+    <bean id="logging" class="pw.cotra.aoptest.Logging"/>
 
     <bean id="helloWorldPo" class="pw.cotra.HelloWorld">
         <property name="message" value="Hello World!"/>
